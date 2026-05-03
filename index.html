@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Pure Nature | Organic Handmade Products</title>
+  <!-- Google Fonts: Playfair Display, Inter, Pacifico -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Pacifico&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Remix Icon CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+  <style>
+    /* Custom styles and animations */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F5F3F0;
+      color: #2d2d2d;
+    }
+    h1, h2, h3, .font-heading {
+      font-family: 'Playfair Display', serif;
+    }
+    .font-brand {
+      font-family: 'Pacifico', cursive;
+    }
+    .text-brand-green {
+      color: #6B7C5B;
+    }
+    .bg-brand-green {
+      background-color: #6B7C5B;
+    }
+    .bg-soft-cream {
+      background-color: #F5F3F0;
+    }
+    .text-accent-yellow {
+      color: #e5b53b;
+    }
+    .bg-accent-yellow {
+      background-color: #e5b53b;
+    }
+    .border-accent-yellow {
+      border-color: #e5b53b;
+    }
+    /* Underline animation for nav links */
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background-color: #6B7C5B;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    /* Pulse animation for WhatsApp button */
+    @keyframes pulse-subtle {
+      0% { box-shadow: 0 0 0 0 rgba(107, 124, 91, 0.5); }
+      70% { box-shadow: 0 0 0 10px rgba(107, 124, 91, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(107, 124, 91, 0); }
+    }
+    .whatsapp-pulse {
+      animation: pulse-subtle 2s infinite;
+    }
+    /* Fade-in on scroll animation */
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Card hover effects */
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+    }
+    .img-hover {
+      transition: transform 0.4s ease;
+    }
+    .card-hover:hover .img-hover {
+      transform: scale(1.05);
+    }
+    /* Star styling */
+    .star {
+      color: #e5b53b;
+    }
+    /* Active filter state */
+    .filter-btn.active {
+      background-color: #6B7C5B;
+      color: white;
+    }
+    /* Modal backdrop */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal.active {
+      display: flex;
+    }
+  </style>
+</head>
+<body class="bg-soft-cream">
+
+  <!-- Sticky Navigation Bar -->
+  <nav class="sticky top-0 bg-white/90 backdrop-blur-md shadow-sm z-50 px-4 md:px-8 py-3">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center">
+        <img src="logo.png" alt="Pure Nature Logo" class="h-12 w-auto" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="font-brand text-3xl text-brand-green ml-2 hidden">Pure Nature</span>
+      </div>
+      <div class="hidden md:flex space-x-8 text-gray-700 font-medium">
+        <a href="#home" class="nav-link hover:text-brand-green transition">Home</a>
+        <a href="#about" class="nav-link hover:text-brand-green transition">About</a>
+        <a href="#products" class="nav-link hover:text-brand-green transition">Products</a>
+        <a href="#contact" class="nav-link hover:text-brand-green transition">Contact</a>
+      </div>
+      <a href="https://wa.me/923001234567" target="_blank" class="bg-brand-green text-white px-5 py-2.5 rounded-full flex items-center gap-2 hover:scale-105 transition-transform whatsapp-pulse">
+        <i class="ri-whatsapp-fill text-xl"></i>
+        <span class="hidden sm:inline font-medium">WhatsApp</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="relative h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('hero.jpg');">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in-section">
+      <h1 class="text-5xl md:text-7xl font-heading text-white mb-4">Pure Nature</h1>
+      <p class="text-2xl md:text-3xl text-accent-yellow font-heading mb-6">Organic Living</p>
+      <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">Handcrafted organic skincare, herbal oils, natural soaps & teas for a pure lifestyle.</p>
+      <a href="#products" class="inline-block bg-accent-yellow text-gray-900 font-bold px-8 py-4 rounded-full text-lg hover:scale-105 transition-transform shadow-lg">Shop Organic Products</a>
+    </div>
+  </section>
+
+  <!-- About Our Story Section -->
+  <section id="about" class="py-20 max-w-7xl mx-auto px-4 md:px-8 fade-in-section">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-heading text-brand-green mb-6">Our Story of Natural Wellness</h2>
+        <p class="text-gray-700 mb-4 leading-relaxed">Born from a passion for pure, chemical-free living, Pure Nature started in a small kitchen with a simple belief: what goes on your body should be as natural as what goes in it. Every product is handcrafted with love using time-honored recipes.</p>
+        <p class="text-gray-700 mb-6 leading-relaxed">We source ingredients directly from local organic farms, ensuring freshness and potency. Our commitment goes beyond skincare – it's a promise to nurture your body and the earth.</p>
+        <div class="flex items-center gap-3 text-brand-green font-semibold">
+          <i class="ri-shield-check-fill text-3xl"></i>
+          <span>100% Natural Promise – No parabens, sulfates, or artificial anything.</span>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-xl card-hover">
+        <img src="Our Story of Natural Wellness.jpg" alt="Our Story" class="w-full h-auto object-cover img-hover rounded-2xl" onerror="this.style.background='#e0d7c6'; this.style.minHeight='300px';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Pure Nature -->
+  <section class="py-20 bg-white/60 fade-in-section">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <h2 class="text-4xl md:text-5xl font-heading text-center text-brand-green mb-14">Why Choose Pure Nature</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover text-center">
+          <i class="ri-leaf-fill text-5xl text-brand-green mb-4"></i>
+          <h3 class="text-xl font-heading font-semibold mb-2">100% Organic</h3>
+          <p class="text-gray-600">Certified organic ingredients, straight from nature.</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover text-center">
+          <i class="ri-heart-pulse-fill text-5xl text-brand-green mb-4"></i>
+          <h3 class="text-xl font-heading font-semibold mb-2">Handmade With Love</h3>
+          <p class="text-gray-600">Small batches crafted with care and attention.</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover text-center">
+          <i class="ri-shield-star-fill text-5xl text-brand-green mb-4"></i>
+          <h3 class="text-xl font-heading font-semibold mb-2">Pure & Safe</h3>
+          <p class="text-gray-600">No toxins, chemicals, or artificial fragrances.</p>
+        </div>
+        <div class="bg-white p-8 rounded-2xl shadow-md card-hover text-center">
+          <i class="ri-timer-flash-fill text-5xl text-brand-green mb-4"></i>
+          <h3 class="text-xl font-heading font-semibold mb-2">Freshly Made</h3>
+          <p class="text-gray-600">Delivered fresh to preserve natural potency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Categories Section -->
+  <section class="py-20 max-w-7xl mx-auto px-4 md:px-8 fade-in-section">
+    <h2 class="text-4xl md:text-5xl font-heading text-center text-brand-green mb-12">Explore Categories</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div class="category-card bg-white rounded-2xl p-4 text-center card-hover cursor-pointer" data-category="skincare">
+        <img src="Organic Skincare.jpg" alt="Skincare" class="w-full h-32 object-cover rounded-xl mb-3" onerror="this.style.background='#d4c9b5'; this.style.height='80px';">
+        <h3 class="font-heading font-semibold text-brand-green">Organic Skincare</h3>
+      </div>
+      <div class="category-card bg-white rounded-2xl p-4 text-center card-hover cursor-pointer" data-category="oils">
+        <img src="Herbal Oils.jpg" alt="Herbal Oils" class="w-full h-32 object-cover rounded-xl mb-3" onerror="this.style.background='#d4c9b5'; this.style.height='80px';">
+        <h3 class="font-heading font-semibold text-brand-green">Herbal Oils</h3>
+      </div>
+      <div class="category-card bg-white rounded-2xl p-4 text-center card-hover cursor-pointer" data-category="soaps">
+        <img src="Natural Soaps.jpg" alt="Natural Soaps" class="w-full h-32 object-cover rounded-xl mb-3" onerror="this.style.background='#d4c9b5'; this.style.height='80px';">
+        <h3 class="font-heading font-semibold text-brand-green">Natural Soaps</h3>
+      </div>
+      <div class="category-card bg-white rounded-2xl p-4 text-center card-hover cursor-pointer" data-category="foods">
+        <img src="Organic Foods.jpg" alt="Organic Foods" class="w-full h-32 object-cover rounded-xl mb-3" onerror="this.style.background='#d4c9b5'; this.style.height='80px';">
+        <h3 class="font-heading font-semibold text-brand-green">Organic Foods</h3>
+      </div>
+      <div class="category-card bg-white rounded-2xl p-4 text-center card-hover cursor-pointer" data-category="teas">
+        <img src="Herbal Teas.jpg" alt="Herbal Teas" class="w-full h-32 object-cover rounded-xl mb-3" onerror="this.style.background='#d4c9b5'; this.style.height='80px';">
+        <h3 class="font-heading font-semibold text-brand-green">Herbal Teas</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Collection / Products Grid -->
+  <section id="products" class="py-20 max-w-7xl mx-auto px-4 md:px-8 fade-in-section">
+    <h2 class="text-4xl md:text-5xl font-heading text-center text-brand-green mb-10">Premium Collection</h2>
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button class="filter-btn active px-5 py-2 rounded-full border border-brand-green text-brand-green font-medium transition" data-filter="all">All Products</button>
+      <button class="filter-btn px-5 py-2 rounded-full border border-brand-green text-brand-green font-medium transition" data-filter="skincare">Skincare</button>
+      <button class="filter-btn px-5 py-2 rounded-full border border-brand-green text-brand-green font-medium transition" data-filter="oils">Herbal Oils</button>
+      <button class="filter-btn px-5 py-2 rounded-full border border-brand-green text-brand-green font-medium transition" data-filter="soaps">Natural Soaps</button>
+      <button class="filter-btn px-5 py-2 rounded-full border border-brand-green text-brand-green font-medium transition" data-filter="foods">Organic Foods</button>
+      <button class="filter-btn px-5 py-2 rounded-full border border-brand-green text-brand-green font-medium transition" data-filter="teas">Herbal Teas</button>
+    </div>
+    <!-- Products Grid -->
+    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+  </section>
+
+  <!-- Best Sellers Section -->
+  <section class="py-20 bg-white/50 fade-in-section">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <h2 class="text-4xl md:text-5xl font-heading text-center text-brand-green mb-12">Best Sellers</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-2xl p-6 shadow-md card-hover relative">
+          <span class="absolute top-4 right-4 bg-accent-yellow text-gray-900 text-xs font-bold px-3 py-1 rounded-full">Best Seller</span>
+          <img src="Rose Face Cream best seller.jpg" alt="Rose Face Cream" class="w-full h-56 object-cover rounded-xl mb-4" onerror="this.style.background='#e0d7c6';">
+          <div class="flex items-center mb-1"><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i></div>
+          <h3 class="text-xl font-heading font-semibold">Rose Face Cream</h3>
+          <p class="text-gray-600 text-sm">Luxurious hydration with damask rose.</p>
+          <p class="text-brand-green font-bold text-lg mt-2">Rs. 2,500</p>
+          <button class="mt-3 w-full bg-accent-yellow text-gray-900 font-semibold py-2 rounded-lg hover:scale-105 transition view-detail-btn" data-product="Rose Face Cream">View Details</button>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-md card-hover relative">
+          <span class="absolute top-4 right-4 bg-accent-yellow text-gray-900 text-xs font-bold px-3 py-1 rounded-full">Best Seller</span>
+          <img src="Raw Honey best seller.jpg" alt="Raw Honey" class="w-full h-56 object-cover rounded-xl mb-4" onerror="this.style.background='#e0d7c6';">
+          <div class="flex items-center mb-1"><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i></div>
+          <h3 class="text-xl font-heading font-semibold">Raw Honey</h3>
+          <p class="text-gray-600 text-sm">Pure, unprocessed wildflower honey.</p>
+          <p class="text-brand-green font-bold text-lg mt-2">Rs. 1,800</p>
+          <button class="mt-3 w-full bg-accent-yellow text-gray-900 font-semibold py-2 rounded-lg hover:scale-105 transition view-detail-btn" data-product="Raw Honey">View Details</button>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-md card-hover relative">
+          <span class="absolute top-4 right-4 bg-accent-yellow text-gray-900 text-xs font-bold px-3 py-1 rounded-full">Best Seller</span>
+          <img src="Lavender Oil Best seller.jpg" alt="Lavender Oil" class="w-full h-56 object-cover rounded-xl mb-4" onerror="this.style.background='#e0d7c6';">
+          <div class="flex items-center mb-1"><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i><i class="ri-star-fill star"></i></div>
+          <h3 class="text-xl font-heading font-semibold">Lavender Oil</h3>
+          <p class="text-gray-600 text-sm">Calming pure essential oil.</p>
+          <p class="text-brand-green font-bold text-lg mt-2">Rs. 2,800</p>
+          <button class="mt-3 w-full bg-accent-yellow text-gray-900 font-semibold py-2 rounded-lg hover:scale-105 transition view-detail-btn" data-product="Lavender Oil">View Details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Promise Section -->
+  <section class="py-20 max-w-7xl mx-auto px-4 md:px-8 fade-in-section">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-heading text-brand-green mb-8">Our Promise to You</h2>
+        <div class="flex gap-4 mb-6">
+          <i class="ri-shield-user-fill text-4xl text-brand-green"></i>
+          <div><h3 class="font-heading text-xl font-semibold">Safety First</h3><p class="text-gray-600">Every ingredient is tested for purity and safety.</p></div>
+        </div>
+        <div class="flex gap-4">
+          <i class="ri-heart-add-fill text-4xl text-brand-green"></i>
+          <div><h3 class="font-heading text-xl font-semibold">Made with Care</h3><p class="text-gray-600">Handcrafted in small batches to ensure quality.</p></div>
+        </div>
+      </div>
+      <div class="rounded-2xl overflow-hidden shadow-xl">
+        <img src="Our Promise to You.jpg" alt="Our Promise" class="w-full h-auto object-cover" onerror="this.style.background='#d4c9b5'; this.style.minHeight='250px';">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-gray-900 text-gray-300 py-16 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+      <div>
+        <div class="flex items-center mb-4">
+          <img src="logo.png" alt="logo" class="h-10 w-auto" onerror="this.style.display='none';">
+          <span class="font-brand text-2xl text-white ml-2">Pure Nature</span>
+        </div>
+        <p class="text-sm">Organic handmade products for a natural, healthy lifestyle.</p>
+        <a href="https://wa.me/923001234567" class="inline-flex items-center gap-2 bg-green-700 text-white px-5 py-2.5 rounded-full mt-4 hover:bg-green-800 transition">
+          <i class="ri-whatsapp-fill"></i> Chat with us
+        </a>
+      </div>
+      <div>
+        <h4 class="text-white font-heading text-xl mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#home" class="hover:text-white transition">Home</a></li>
+          <li><a href="#about" class="hover:text-white transition">About</a></li>
+          <li><a href="#products" class="hover:text-white transition">Products</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-heading text-xl mb-4">Connect</h4>
+        <div class="flex space-x-4 text-2xl">
+          <a href="#" class="hover:text-white"><i class="ri-facebook-fill"></i></a>
+          <a href="#" class="hover:text-white"><i class="ri-instagram-fill"></i></a>
+          <a href="https://wa.me/923001234567" class="hover:text-white"><i class="ri-whatsapp-fill"></i></a>
+        </div>
+        <p class="text-xs mt-6">© 2025 Pure Nature. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product Detail Modal -->
+  <div id="productModal" class="modal">
+    <div class="bg-white rounded-2xl max-w-lg w-full mx-4 p-6 relative max-h-[90vh] overflow-y-auto">
+      <button class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800" onclick="closeModal('productModal')">&times;</button>
+      <img id="modalProductImage" src="" class="w-full h-64 object-cover rounded-xl mb-4">
+      <h3 id="modalProductName" class="text-2xl font-heading font-semibold"></h3>
+      <div class="flex items-center my-2" id="modalStars"></div>
+      <p id="modalDescription" class="text-gray-700 text-sm mb-3"></p>
+      <div class="mb-4">
+        <h4 class="font-semibold text-brand-green">Key Ingredients</h4>
+        <p id="modalIngredients" class="text-sm text-gray-600"></p>
+      </div>
+      <p class="text-xl font-bold text-brand-green" id="modalPrice"></p>
+      <div class="flex items-center gap-4 my-4">
+        <button onclick="changeQty(-1)" class="bg-gray-200 px-3 py-1 rounded-full text-lg">−</button>
+        <span id="qtyDisplay" class="text-lg font-semibold">1</span>
+        <button onclick="changeQty(1)" class="bg-gray-200 px-3 py-1 rounded-full text-lg">+</button>
+      </div>
+      <button id="proceedCheckoutBtn" class="w-full bg-accent-yellow text-gray-900 font-bold py-3 rounded-xl hover:scale-105 transition">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkoutModal" class="modal">
+    <div class="bg-white rounded-2xl max-w-md w-full mx-4 p-6 relative">
+      <button class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800" onclick="closeModal('checkoutModal')">&times;</button>
+      <h3 class="text-2xl font-heading text-brand-green mb-4">Checkout</h3>
+      <div id="orderSummary" class="bg-gray-50 p-4 rounded-xl mb-4 text-sm"></div>
+      <form id="checkoutForm" class="space-y-4">
+        <input type="text" id="fullName" placeholder="Full Name" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5">
+        <input type="tel" id="phone" placeholder="Phone Number" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5">
+        <textarea id="address" placeholder="Delivery Address" required class="w-full border border-gray-300 rounded-xl px-4 py-2.5"></textarea>
+        <button type="submit" class="w-full bg-green-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-green-800 transition">
+          <i class="ri-whatsapp-fill"></i> Send Order via WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Product data
+    const products = [
+      { name: "Rose Face Cream", price: 2500, rating: 5, reviews: 24, category: "skincare", image: "Rose Face Cream.jpg", desc: "A luxurious cream infused with rose petals and shea butter. Deeply hydrates and restores skin's natural glow.", ingredients: "Rose extract, Shea butter, Jojoba oil, Vitamin E" },
+      { name: "Aloe Vera Gel", price: 1800, rating: 4, reviews: 18, category: "skincare", image: "Aloe Vera Gel.jpg", desc: "Pure aloe vera gel for soothing sunburns and moisturizing. Lightweight and non-greasy.", ingredients: "Organic Aloe vera, Witch hazel, Glycerin" },
+      { name: "Neem Toner", price: 1500, rating: 4, reviews: 22, category: "skincare", image: "Neem Toner.jpg", desc: "Clarifying toner with neem and tea tree. Helps control acne and refine pores.", ingredients: "Neem extract, Tea tree oil, Aloe vera water" },
+      { name: "Coconut Moisturizer", price: 2200, rating: 5, reviews: 27, category: "skincare", image: "Coconut Moisturizer.jpg", desc: "Rich coconut cream moisturizer for dry skin. Absorbs quickly with a tropical scent.", ingredients: "Coconut oil, Cocoa butter, Almond oil" },
+      { name: "Lavender Oil", price: 2800, rating: 5, reviews: 35, category: "oils", image: "Lavender Oil Best seller.jpg", desc: "Calming pure lavender essential oil. Perfect for aromatherapy and relaxation.", ingredients: "100% Lavandula angustifolia oil" },
+      { name: "Tea Tree Oil", price: 3500, rating: 4, reviews: 19, category: "oils", image: "Eucalyptus Oil.jpg", desc: "Powerful tea tree oil for skin blemishes and cleansing. Must be diluted.", ingredients: "Melaleuca alternifolia leaf oil" },
+      { name: "Eucalyptus Oil", price: 2600, rating: 5, reviews: 28, category: "oils", image: "Eucalyptus Oil.jpg", desc: "Invigorating eucalyptus oil for steam inhalation and muscle relief.", ingredients: "Eucalyptus globulus oil" },
+      { name: "Rosemary Oil", price: 3000, rating: 4, reviews: 23, category: "oils", image: "Rosemary Oil.jpg", desc: "Stimulating rosemary oil for hair growth and mental clarity.", ingredients: "Rosmarinus officinalis oil" },
+      { name: "Jojoba Oil", price: 4200, rating: 5, reviews: 41, category: "oils", image: "Jojoba Oil.jpg", desc: "Golden jojoba oil, closest to skin's natural sebum. Excellent moisturizer.", ingredients: "Simmondsia chinensis seed oil" },
+      { name: "Oatmeal Soap", price: 800, rating: 5, reviews: 33, category: "soaps", image: "Oatmeal Soap.jpg", desc: "Gentle exfoliating soap with colloidal oatmeal. Soothes sensitive skin.", ingredients: "Oatmeal, Coconut oil, Shea butter" },
+      { name: "Charcoal Soap", price: 950, rating: 4, reviews: 26, category: "soaps", image: "Charcoal Soap.jpg", desc: "Detoxifying activated charcoal soap for deep pore cleansing.", ingredients: "Activated charcoal, Tea tree oil, Olive oil" },
+      { name: "Honey Soap", price: 1100, rating: 5, reviews: 38, category: "soaps", image: "Honey Soap.jpg", desc: "Nourishing honey soap with propolis. Leaves skin soft and supple.", ingredients: "Raw honey, Beeswax, Almond oil" },
+      { name: "Raw Honey", price: 1800, rating: 5, reviews: 45, category: "foods", image: "Raw Honey.jpg", desc: "Unfiltered raw wildflower honey. A natural sweetener full of enzymes.", ingredients: "100% Raw wildflower honey" },
+      { name: "Chia Seeds", price: 2200, rating: 4, reviews: 32, category: "foods", image: "Chia Seeds.jpg", desc: "Organic chia seeds rich in omega-3 and fiber. Perfect for puddings.", ingredients: "Organic Salvia hispanica seeds" },
+      { name: "Chamomile Tea", price: 1500, rating: 5, reviews: 39, category: "teas", image: "Chamomile Tea.jpg", desc: "Calming chamomile flowers for a soothing bedtime tea.", ingredients: "Dried Matricaria chamomilla flowers" }
+    ];
+
+    let currentProduct = null;
+    let quantity = 1;
+
+    function renderProducts(filter = 'all') {
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl shadow-md card-hover overflow-hidden cursor-pointer';
+        card.innerHTML = `
+          <img src="${p.image}" alt="${p.name}" class="w-full h-56 object-cover img-hover" onerror="this.style.background='#e0d7c6';">
+          <div class="p-5">
+            <div class="flex items-center mb-1">${Array(5).fill(0).map((_,i) => `<i class="ri-star-fill star text-sm ${i < p.rating ? '' : 'text-gray-300'}"></i>`).join('')} <span class="text-xs text-gray-500 ml-2">(${p.reviews})</span></div>
+            <h3 class="text-lg font-heading font-semibold">${p.name}</h3>
+            <p class="text-gray-500 text-sm line-clamp-2">${p.desc}</p>
+            <p class="text-brand-green font-bold mt-2">Rs. ${p.price.toLocaleString()}</p>
+            <button class="mt-3 w-full bg-accent-yellow text-gray-900 font-semibold py-2 rounded-lg buy-now-btn">Buy Now</button>
+          </div>`;
+        card.addEventListener('click', (e) => {
+          if (!e.target.classList.contains('buy-now-btn')) openProductModal(p);
+        });
+        card.querySelector('.buy-now-btn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          openProductModal(p);
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    function openProductModal(product) {
+      currentProduct = product;
+      quantity = 1;
+      document.getElementById('modalProductImage').src = product.image;
+      document.getElementById('modalProductName').textContent = product.name;
+      document.getElementById('modalDescription').textContent = product.desc;
+      document.getElementById('modalIngredients').textContent = product.ingredients;
+      document.getElementById('modalPrice').textContent = `Rs. ${product.price.toLocaleString()}`;
+      const starsHtml = Array(5).fill(0).map((_,i) => `<i class="ri-star-fill star text-xl ${i < product.rating ? '' : 'text-gray-300'}"></i>`).join('');
+      document.getElementById('modalStars').innerHTML = starsHtml + ` <span class="text-sm text-gray-500 ml-2">(${product.reviews} reviews)</span>`;
+      document.getElementById('qtyDisplay').textContent = quantity;
+      document.getElementById('productModal').classList.add('active');
+    }
+
+    function changeQty(delta) {
+      quantity = Math.max(1, quantity + delta);
+      document.getElementById('qtyDisplay').textContent = quantity;
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    document.getElementById('proceedCheckoutBtn').addEventListener('click', () => {
+      if (!currentProduct) return;
+      document.getElementById('productModal').classList.remove('active');
+      const total = currentProduct.price * quantity;
+      document.getElementById('orderSummary').innerHTML = `
+        <p><strong>${currentProduct.name}</strong> x ${quantity}</p>
+        <p class="text-brand-green font-bold text-lg">Total: Rs. ${total.toLocaleString()}</p>`;
+      document.getElementById('checkoutModal').classList.add('active');
+    });
+
+    document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('fullName').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      if (!name || !phone || !address) return alert('Please fill all fields');
+      const total = currentProduct.price * quantity;
+      const message = `Hello Pure Nature!%0A%0AOrder Details:%0AProduct: ${currentProduct.name}%0AQuantity: ${quantity}%0APrice per item: Rs. ${currentProduct.price}%0ATotal: Rs. ${total}%0A%0ACustomer:%0AName: ${name}%0APhone: ${phone}%0AAddress: ${address}`;
+      window.open(`https://wa.me/923001234567?text=${message}`, '_blank');
+      closeModal('checkoutModal');
+      document.getElementById('checkoutForm').reset();
+    });
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderProducts(btn.dataset.filter);
+      });
+    });
+
+    // Category cards click filter
+    document.querySelectorAll('.category-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const cat = card.dataset.category;
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('active');
+          if (b.dataset.filter === cat) b.classList.add('active');
+        });
+        renderProducts(cat);
+        document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Best seller detail buttons
+    document.querySelectorAll('.view-detail-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const productName = btn.dataset.product;
+        const prod = products.find(p => p.name === productName);
+        if (prod) openProductModal(prod);
+      });
+    });
+
+    // Scroll fade-in observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+
+    // Close modals on backdrop click
+    window.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal')) {
+        e.target.classList.remove('active');
+      }
+    });
+
+    // Initial render
+    renderProducts();
+  </script>
+</body>
+</html>
